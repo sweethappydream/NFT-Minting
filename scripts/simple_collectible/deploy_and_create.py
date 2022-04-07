@@ -1,8 +1,6 @@
-from brownie import network, SimpleCollectible
+from brownie import SimpleCollectible
 from scripts.helpful_scripts import (
     get_account,
-    # get_contract,
-    # get_breed,
     OPENSEA_URL,
 )
 
@@ -20,6 +18,7 @@ def deploy_and_create():
     )
     print("Please wait up to 20 minutes, and hit the refresh metadata button. ")
     return simple_collectible
+
 
 def main():
     deploy_and_create()

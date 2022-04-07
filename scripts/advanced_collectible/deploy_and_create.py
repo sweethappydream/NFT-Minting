@@ -4,7 +4,6 @@ from scripts.helpful_scripts import (
     get_account,
     get_contract,
     get_breed,
-    OPENSEA_URL,
 )
 
 

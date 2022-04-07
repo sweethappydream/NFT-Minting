@@ -10,7 +10,7 @@ def test_can_create_advanced_collectible_integration():
     # deploy the contract
     # create an NFT
     # get random breed back
-    if network.show_active() not in LOCAL_BLOCKCHAIN_ENVIRONMENTS:
+    if network.show_active() in LOCAL_BLOCKCHAIN_ENVIRONMENTS:
         pytest.skip("Only for local testing")
     # Acting step
     advanced_collectible, creation_transaction = deploy_and_create()

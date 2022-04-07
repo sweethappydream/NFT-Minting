@@ -1,0 +1,32 @@
+from brownie import config, network, AdvancedCollectible
+from scripts.helpful_scripts import (
+    fund_with_link,
+    get_account,
+    get_contract,
+    get_breed,
+    OPENSEA_URL,
+)
+
+
+def deploy_and_create():
+    account = get_account()
+    from_account = {"from": account}
+    # We want to be able to use the deployed contracts if we are on a testnet
+    # Otherwise, we want to deploy some mocks and use those
+    # Rinkeby
+    advanced_collectible = AdvancedCollectible.deploy(
+        get_contract("vrf_coordinator"),
+        get_contract("link_token"),
+        config["networks"][network.show_active()]["keyhash"],
+        config["networks"][network.show_active()]["fee"],
+        from_account,
+    )
+    fund_with_link(advanced_collectible.address)
+    creating_tx = advanced_collectible.createCollectible(from_account)
+    creating_tx.wait(1)
+    print("New token has been created")
+    return advanced_collectible, creating_tx
+
+
+def main():
+    deploy_and_create()
